@@ -1,20 +1,99 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+<ion-content class="ion-padding notion-style">
+  <!-- Header estilo Notion -->
+  <div class="notion-header">
+    <h1 class="notion-title">Mis Tareas</h1>
   </div>
+
+  <!-- Sección de estadísticas - ahora en scroll horizontal -->
+  <div class="notion-stats-scroll">
+    <div class="notion-stats-container">
+      <div class="notion-stat-card">
+        <div class="stat-icon-container">
+          <ion-icon name="list-outline"></ion-icon>
+        </div>
+        <div class="stat-content">
+          <h3>{{ tareas.length }}</h3>
+          <p>Total</p>
+        </div>
+      </div>
+
+      <div class="notion-stat-card">
+        <div class="stat-icon-container">
+          <ion-icon name="time-outline"></ion-icon>
+        </div>
+        <div class="stat-content">
+          <h3>{{ tareasPendientes }}</h3>
+          <p>Pendientes</p>
+        </div>
+      </div>
+
+      <div class="notion-stat-card">
+        <div class="stat-icon-container">
+          <ion-icon name="checkmark-done-outline"></ion-icon>
+        </div>
+        <div class="stat-content">
+          <h3>{{ tareasCompletadas }}</h3>
+          <p>Completadas</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lista de tareas -->
+  <div class="notion-database-container">
+    <div class="notion-database-header">
+      <div class="notion-database-title">
+        <ion-icon name="albums-outline" class="database-icon"></ion-icon>
+        <h2>Tareas Pendientes</h2>
+      </div>
+      <ion-button fill="clear" size="small" class="notion-view-button">
+        <ion-icon name="options-outline" slot="start"></ion-icon>
+        Vista
+      </ion-button>
+    </div>
+
+    <!-- Mensaje cuando no hay tareas -->
+    <div class="notion-empty-state" *ngIf="tareas.length === 0">
+      <div class="empty-state-content">
+        <ion-icon name="document-text-outline"></ion-icon>
+        <h3>No hay tareas pendientes</h3>
+        <p>¡Perfecto! Puedes agregar una nueva tarea para comenzar.</p>
+      </div>
+    </div>
+
+
+    <div class="notion-database-list-mobile" *ngIf="tareas.length > 0">
+      <div class="notion-task-card" *ngFor="let tarea of tareas">
+        <div class="task-main-info">
+          <ion-checkbox [checked]="tarea.estado === 'completada'" (ionChange)="toggleEstado(tarea)"></ion-checkbox>
+          <div class="task-title-container">
+            <span class="task-title" [class.completed]="tarea.estado === 'completada'">{{ tarea.nombre }}</span>
+            <div class="task-meta">
+              <span class="notion-tag-mobile"
+                [class.pendiente]="tarea.estado === 'pendiente'"
+                [class.completada]="tarea.estado === 'completada'">
+                {{ tarea.estado | titlecase }}
+              </span>
+              <span class="task-date">{{ tarea.fechaVencimiento | date:'shortDate' }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="task-actions">
+          <ion-button fill="clear" size="small" (click)="editarTarea(tarea)">
+            <ion-icon name="create-outline"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear" size="small" color="danger" (click)="eliminarTarea(tarea.id)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button class="notion-fab-button" (click)="nuevaTarea()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

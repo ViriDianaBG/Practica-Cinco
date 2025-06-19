@@ -1,0 +1,123 @@
+/* Estilos generales */
+.notion-header {
+  --background: #ffffff;
+  --border-color: #e0e0e0;
+}
+
+.notion-toolbar {
+  --background: #ffffff;
+  --border-width: 0;
+}
+
+.notion-back-button {
+  --color: #000000;
+}
+
+.notion-title {
+  color: #000000;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.notion-icon-button {
+  --color: #000000;
+}
+
+.notion-content {
+  --background: #f7f6f3;
+  color: #000000;
+}
+
+.notion-page {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin-top: 16px;
+}
+
+.notion-page-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.notion-page-icon {
+  font-size: 24px;
+  margin-right: 12px;
+  color: #000000;
+}
+
+.notion-page-title {
+  color: #000000;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.notion-property {
+  margin-bottom: 16px;
+}
+
+.notion-property-name {
+  color: #000000;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.notion-input-item,
+.notion-textarea-item,
+.notion-date-item {
+  --background: #f7f6f3;
+  --border-radius: 4px;
+  --padding-start: 12px;
+  --padding-end: 12px;
+  margin-top: 4px;
+  color: #000;
+}
+
+/* Estilos específicos para el datetime */
+.datetime-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.white-datetime {
+  --background: #ffffff;
+  --background-rgb: 255, 255, 255;
+  --wheel-highlight-background: #f7f6f3;
+  --wheel-fade-background-rgb: 255, 255, 255;
+  color: #000000 !important;
+  border-radius: 8px;
+  max-width: 300px;
+  width: 100%;
+}
+
+/* Botón de guardar */
+.notion-save-button {
+  --background: #000000;
+  --color: #ffffff;
+  --border-radius: 4px;
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+  margin-top: 24px;
+  font-weight: 500;
+}
+
+/* Placeholder */
+::placeholder {
+  color: #666666 !important;
+  opacity: 1;
+}
+
+.datetime-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-size: small;
+}

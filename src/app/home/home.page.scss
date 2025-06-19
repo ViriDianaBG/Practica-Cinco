@@ -1,27 +1,251 @@
-#container {
+// Variables
+$notion-bg: #f7f6f3;
+$notion-text: #37352f;
+$notion-text-light: #787774;
+$notion-border: #e6e6e6;
+$notion-hover: rgba(55, 53, 47, 0.08);
+$notion-tag-bg: rgba(55, 53, 47, 0.08);
+$notion-pending: #c15d5d;
+$notion-completed: #88ad88;
+
+// Estilos generales
+.notion-style {
+  --background: #{$notion-bg};
+  --ion-font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+}
+
+// Header
+.notion-header {
+  margin-bottom: 16px;
+
+  .notion-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: $notion-text;
+    margin: 0;
+  }
+}
+
+// Estadísticas - Scroll horizontal
+.notion-stats-scroll {
+  overflow-x: auto;
+  margin-bottom: 20px;
+  padding-bottom: 8px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.notion-stats-container {
+  display: flex;
+  gap: 12px;
+  width: max-content;
+  padding: 0 4px;
+}
+
+.notion-stat-card {
+  background: white;
+  border-radius: 8px;
+  padding: 12px;
+  min-width: 100px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid $notion-border;
+
+  .stat-icon-container {
+    background: $notion-hover;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    ion-icon {
+      font-size: 16px;
+      color: $notion-text;
+    }
+  }
+
+  .stat-content {
+    h3 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 700;
+      color: $notion-text;
+    }
+
+    p {
+      margin: 2px 0 0;
+      font-size: 12px;
+      color: $notion-text-light;
+    }
+  }
+}
+
+// Base de datos
+.notion-database-container {
+  background: white;
+  border-radius: 8px;
+  border: 1px solid $notion-border;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  margin-bottom: 20px;
+
+  .notion-database-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid $notion-border;
+
+    .notion-database-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      h2 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+        color: $notion-text;
+      }
+    }
+
+    .database-icon {
+      color: $notion-text-light;
+    }
+
+    .notion-view-button {
+      --color: #{$notion-text-light};
+      text-transform: none;
+      font-size: 13px;
+    }
+  }
+}
+
+// Estado vacío
+.notion-empty-state {
+  padding: 32px 16px;
   text-align: center;
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  ion-icon {
+    font-size: 40px;
+    color: $notion-text-light;
+    opacity: 0.5;
+    margin-bottom: 12px;
+  }
+
+  h3 {
+    margin: 0 0 8px;
+    color: $notion-text;
+    font-size: 16px;
+  }
+
+  p {
+    margin: 0 0 16px;
+    color: $notion-text-light;
+    font-size: 13px;
+  }
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+// Lista de tareas móvil
+.notion-database-list-mobile {
+  .notion-task-card {
+    padding: 12px;
+    border-bottom: 1px solid $notion-border;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .task-main-info {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      flex: 1;
+
+      ion-checkbox {
+        margin-top: 2px;
+      }
+
+      .task-title-container {
+        flex: 1;
+
+        .task-title {
+          display: block;
+          color: $notion-text;
+          margin-bottom: 4px;
+
+          &.completed {
+            text-decoration: line-through;
+            color: $notion-text-light;
+          }
+        }
+
+        .task-meta {
+          display: flex;
+          gap: 8px;
+          align-items: center;
+
+          .notion-tag-mobile {
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background: $notion-tag-bg;
+            color: $notion-text;
+
+            &.pendiente {
+              background: lighten($notion-pending, 35%);
+              color: $notion-pending;
+            }
+
+            &.completada {
+              background: lighten($notion-completed, 35%);
+              color: $notion-completed;
+            }
+          }
+
+          .task-date {
+            font-size: 11px;
+            color: $notion-text-light;
+          }
+        }
+      }
+    }
+
+    .task-actions {
+      display: flex;
+      gap: 2px;
+
+      ion-button {
+        --padding-start: 4px;
+        --padding-end: 4px;
+      }
+    }
+  }
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+// Botón flotante
+.notion-fab-button {
+  --background: #{$notion-text};
+  --background-activated: #{$notion-text};
+  --color: white;
+  margin-bottom: 16px;
+  margin-right: 16px;
 }
 
-#container a {
-  text-decoration: none;
+// Media queries para tablets
+@media (min-width: 576px) {
+  .notion-stats-container {
+    gap: 16px;
+  }
+
+  .notion-stat-card {
+    min-width: 120px;
+    padding: 14px;
+  }
 }

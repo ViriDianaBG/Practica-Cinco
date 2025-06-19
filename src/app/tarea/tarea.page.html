@@ -1,0 +1,58 @@
+<ion-header class="notion-header">
+  <ion-toolbar class="notion-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" class="notion-back-button"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="notion-title">Crear Tarea</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="notion-content">
+  <div class="notion-page">
+    <div class="notion-page-header">
+      <div class="notion-page-icon">📝</div>
+      <h1 class="notion-page-title">Nueva Tarea</h1>
+    </div>
+
+    <form [formGroup]="tareaForm" (ngSubmit)="guardarTarea()" class="notion-form">
+      <div class="notion-property">
+        <div class="notion-property-name">Nombre</div>
+        <ion-item lines="none" class="notion-input-item">
+          <ion-input formControlName="nombre" placeholder="Escribe el nombre de la tarea"></ion-input>
+        </ion-item>
+      </div>
+
+      <div class="notion-property">
+        <div class="notion-property-name">Descripción</div>
+        <ion-item lines="none" class="notion-textarea-item">
+          <ion-textarea formControlName="descripcion" placeholder="Añade una descripción detallada" rows="4"></ion-textarea>
+        </ion-item>
+      </div>
+
+      <div class="notion-property">
+        <div class="notion-property-name">Fecha de vencimiento</div>
+        <ion-item lines="none" class="notion-date-item">
+        <div class="datetime-container">
+          <ion-datetime
+    presentation="date"
+    formControlName="fechaVencimiento"
+    class="white-datetime">
+  </ion-datetime>
+</div>
+
+        </ion-item>
+      </div>
+
+
+      <ion-button
+        expand="block"
+        type="submit"
+        class="notion-save-button"
+        [disabled]="tareaForm.invalid">
+        <ion-icon name="checkmark" slot="start"></ion-icon>
+        Guardar Tarea
+      </ion-button>
+    </form>
+  </div>
+</ion-content>
