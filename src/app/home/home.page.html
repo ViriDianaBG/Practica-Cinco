@@ -7,31 +7,31 @@
   <!-- Sección de estadísticas - ahora en scroll horizontal -->
   <div class="notion-stats-scroll">
     <div class="notion-stats-container">
-      <div class="notion-stat-card">
-        <div class="stat-icon-container">
+      <div class="notion-stats-card">
+        <div class="icon-container">
           <ion-icon name="list-outline"></ion-icon>
         </div>
-        <div class="stat-content">
+        <div class="content">
           <h3>{{ tareas.length }}</h3>
           <p>Total</p>
         </div>
       </div>
 
-      <div class="notion-stat-card">
-        <div class="stat-icon-container">
+      <div class="notion-stats-card">
+        <div class="icon-container">
           <ion-icon name="time-outline"></ion-icon>
         </div>
-        <div class="stat-content">
+        <div class="content">
           <h3>{{ tareasPendientes }}</h3>
           <p>Pendientes</p>
         </div>
       </div>
 
-      <div class="notion-stat-card">
-        <div class="stat-icon-container">
+      <div class="notion-stats-card">
+        <div class="icon-container">
           <ion-icon name="checkmark-done-outline"></ion-icon>
         </div>
-        <div class="stat-content">
+        <div class="content">
           <h3>{{ tareasCompletadas }}</h3>
           <p>Completadas</p>
         </div>
@@ -42,43 +42,41 @@
   <!-- Lista de tareas -->
   <div class="notion-database-container">
     <div class="notion-database-header">
-      <div class="notion-database-title">
+      <div class="title">
         <ion-icon name="albums-outline" class="database-icon"></ion-icon>
         <h2>Tareas Pendientes</h2>
       </div>
-      <ion-button fill="clear" size="small" class="notion-view-button">
+      <ion-button fill="clear" size="small" class="view-button">
         <ion-icon name="options-outline" slot="start"></ion-icon>
         Vista
       </ion-button>
     </div>
 
     <!-- Mensaje cuando no hay tareas -->
-    <div class="notion-empty-state" *ngIf="tareas.length === 0">
-      <div class="empty-state-content">
-        <ion-icon name="document-text-outline"></ion-icon>
-        <h3>No hay tareas pendientes</h3>
-        <p>¡Perfecto! Puedes agregar una nueva tarea para comenzar.</p>
-      </div>
+    <div class="notion-empty" *ngIf="tareas.length === 0">
+      <ion-icon name="document-text-outline"></ion-icon>
+      <h3>No hay tareas pendientes</h3>
+      <p>¡Perfecto! Puedes agregar una nueva tarea para comenzar.</p>
     </div>
 
-
-    <div class="notion-database-list-mobile" *ngIf="tareas.length > 0">
+    <!-- Lista de tareas -->
+    <div class="notion-task" *ngIf="tareas.length > 0">
       <div class="notion-task-card" *ngFor="let tarea of tareas">
-        <div class="task-main-info">
+        <div class="main-info">
           <ion-checkbox [checked]="tarea.estado === 'completada'" (ionChange)="toggleEstado(tarea)"></ion-checkbox>
-          <div class="task-title-container">
-            <span class="task-title" [class.completed]="tarea.estado === 'completada'">{{ tarea.nombre }}</span>
-            <div class="task-meta">
-              <span class="notion-tag-mobile"
+          <div class="title-container">
+            <span class="title" [class.completed]="tarea.estado === 'completada'">{{ tarea.nombre }}</span>
+            <div class="meta">
+              <span class="tag"
                 [class.pendiente]="tarea.estado === 'pendiente'"
                 [class.completada]="tarea.estado === 'completada'">
                 {{ tarea.estado | titlecase }}
               </span>
-              <span class="task-date">{{ tarea.fechaVencimiento | date:'shortDate' }}</span>
+              <span class="date">{{ tarea.fechaVencimiento | date:'shortDate' }}</span>
             </div>
           </div>
         </div>
-        <div class="task-actions">
+        <div class="actions">
           <ion-button fill="clear" size="small" (click)="editarTarea(tarea)">
             <ion-icon name="create-outline"></ion-icon>
           </ion-button>
@@ -89,7 +87,6 @@
       </div>
     </div>
   </div>
-
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button class="notion-fab-button" (click)="nuevaTarea()">
